@@ -41,15 +41,17 @@ export const createUser = async (prevState: any, formData: FormData) => {
   }
 };
 
+const filepath = process.cwd() + "/dummy/erssu.json";
+
 export const fetchUsers = async (): Promise<User[]> => {
-  const result = await readFile("./dummy/users.json", { encoding: "utf-8" });
+  const result = await readFile(filepath, { encoding: "utf-8" });
   const users = result ? JSON.parse(result) : [];
   return users;
 };
 export const saveUser = async (user: User) => {
   const users = await fetchUsers();
   users.push(user);
-  await writeFile("./dummy/users.json", JSON.stringify(users, null, 2));
+  await writeFile(filepath, JSON.stringify(users, null, 2));
 };
 
 export const deleteUser = async (formData: FormData) => {
@@ -57,7 +59,7 @@ export const deleteUser = async (formData: FormData) => {
   const users = await fetchUsers();
   const newUsers = users.filter((user) => user.id !== id);
   console.log({ newUsers });
-  await writeFile("./dummy/users.json", JSON.stringify(newUsers, null, 2));
+  await writeFile(filepath, JSON.stringify(newUsers, null, 2));
   revalidatePath("/acitons");
 };
 
@@ -68,6 +70,6 @@ export const removeUser = async (id: string, formData: FormData) => {
   const users = await fetchUsers();
   const newUsers = users.filter((user) => user.id !== id);
   console.log({ newUsers });
-  await writeFile("./dummy/users.json", JSON.stringify(newUsers, null, 2));
+  await writeFile(filepath, JSON.stringify(newUsers, null, 2));
   revalidatePath("/acitons");
 };
