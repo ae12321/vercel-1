@@ -41,8 +41,9 @@ export const createUser = async (prevState: any, formData: FormData) => {
   }
 };
 
-//
-const filepath = process.cwd() + "/public/users.json";
+// TODO: だめだ。claudeにも聞いたがvercelはファイル書き込みができないみたい
+// devとprodで処理変えるしかない
+const filepath = process.cwd() + "/dummy/users.json";
 console.log(filepath);
 
 export const fetchUsers = async (): Promise<User[]> => {
