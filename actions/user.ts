@@ -42,7 +42,8 @@ export const createUser = async (prevState: any, formData: FormData) => {
 };
 
 //
-const filepath = process.cwd() + "/dummy/users.json";
+const filepath = process.cwd() + "/public/users.json";
+console.log(filepath);
 
 export const fetchUsers = async (): Promise<User[]> => {
   const result = await readFile(filepath, { encoding: "utf-8" });
